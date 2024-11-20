@@ -16,7 +16,7 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Enter you city (or ctrl+c for exit):");
+            System.out.println("Enter your city (or ctrl+c for exit):");
             city = scanner.nextLine();
 
             Response<CurrentResponse> response = WeatherService.instance().currentResponse(city).execute();
