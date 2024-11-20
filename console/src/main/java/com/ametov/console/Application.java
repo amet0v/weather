@@ -15,16 +15,18 @@ public class Application {
         String city;
         Scanner scanner = new Scanner(System.in);
 
-        WeatherApi api = WeatherService.getInstance().api();
-
         while (true) {
             System.out.println("Enter you city (or ctrl+c for exit):");
             city = scanner.nextLine();
 
-            Response<CurrentResponse> response = api.currentResponse(city).execute();
-            CurrentResponse body = response.body();
+            Response<CurrentResponse> response = WeatherService.instance().currentResponse(city).execute();
 
-            System.out.printf("Temperature is %s and it feels like %s\n", body.getCurrent().getTemp_c(), body.getCurrent().getFeelslike_c());
+            if (response.isSuccessful()){
+                CurrentResponse body = response.body();
+                System.out.printf("Temperature is %s and it feels like %s\n", body.getCurrent().getTemp_c(), body.getCurrent().getFeelslike_c());
+            } else {
+                System.out.println("City not found. Try again");
+            }
         }
     }
 }
