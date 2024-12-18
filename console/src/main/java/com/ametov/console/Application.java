@@ -23,6 +23,7 @@ public class Application {
 
             if (response.isSuccessful()){
                 CurrentResponse body = response.body();
+                assert body != null;
                 System.out.printf("Temperature is %s and it feels like %s\n", body.getCurrent().getTemp_c(), body.getCurrent().getFeelslike_c());
             } else {
                 System.out.println("City not found. Try again");
